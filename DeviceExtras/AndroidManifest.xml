@@ -24,13 +24,10 @@
 
     <uses-permission android:name="android.permission.INJECT_EVENTS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <protected-broadcast android:name="com.android.systemui.doze.pulse" />
-    <protected-broadcast android:name="org.evolution.device.DeviceExtras.UPDATE_SLIDER_POSITION" />
-    <protected-broadcast android:name="org.evolution.device.DeviceExtras.UPDATE_SLIDER_SETTINGS" />
 
     <uses-sdk
         android:minSdkVersion="28"
@@ -57,8 +54,6 @@
 
         <activity 
             android:name=".DeviceExtras" />
-        <activity 
-            android:name=".KeyHandler" />
 
         <!-- DeviceExtras -->
         <activity
@@ -171,80 +166,6 @@
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-        </service>
-
-        <!-- FPS info service -->
-        <service
-            android:name=".FPSInfoService"
-            android:exported="false" />
-
-        <!-- FPS tile -->
-        <service
-            android:name=".FPSTileService"
-            android:icon="@drawable/ic_fps_overlay"
-            android:label="@string/fps_info_title"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-        </service>
-
-        <!-- Game Mode  Tile -->
-        <service
-            android:name=".GameModeTileService"
-            android:icon="@drawable/ic_game_mode"
-            android:label="@string/game_mode_title"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action
-                    android:name="android.service.quicksettings.action.QS_TILE"/>
-            </intent-filter>
-        </service>
-
-         <!-- KCalSettings Activity -->
-        <activity
-            android:name=".kcal.KCalSettingsActivity"
-            android:exported="false"
-            android:label="@string/advanced_settings_kcal">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <!-- KCalSettings Tile -->
-        <service
-            android:name=".kcal.KCalTileService"
-            android:icon="@drawable/ic_kcal"
-            android:label="@string/device_kcal_title"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action
-                    android:name="android.service.quicksettings.action.QS_TILE"/>
-            </intent-filter>
-        </service>
-
-        <!-- Touchboost tile -->
-        <service
-            android:name=".TouchboostTileService"
-            android:icon="@drawable/ic_touchboost"
-            android:label="@string/touchboost_title"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE" />
-            </intent-filter>
-        </service>
-
-        <!-- USB 2.0 force FastCharge tile -->
-        <service
-            android:name=".USB2FastChargeTileService"
-            android:icon="@drawable/ic_usb2_fc"
-            android:label="@string/usb2_fc_title"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action
-                    android:name="android.service.quicksettings.action.QS_TILE"/>
             </intent-filter>
         </service>
 
