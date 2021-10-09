@@ -17,7 +17,7 @@
      limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.cherishos.device.DeviceExtras"
+    package="org.cherish.device.DeviceExtras"
     android:sharedUserId="android.uid.system"
     android:versionCode="4"
     android:versionName="4.0">
@@ -88,28 +88,6 @@
             </intent-filter>
         </service>
 
-        <!-- Panel Settings Activity -->
-        <activity
-            android:name=".PanelSettingsActivity"
-            android:exported="true"
-            android:label="@string/panel_modes_title" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
-        </activity>
-
-        <!-- Panel Mode's Tile -->
-        <service
-            android:name=".PanelModeTileService"
-            android:icon="@drawable/ic_panel_modes"
-            android:label="@string/panel_modes_title"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action android:name="android.service.quicksettings.action.QS_TILE"/>
-            </intent-filter>
-        </service>
-
         <!-- DC-Dimming tile -->
         <service
             android:name=".DCModeTileService"
@@ -172,7 +150,7 @@
         <!-- Search indexing -->
         <provider
             android:name=".ConfigPanelSearchIndexablesProvider"
-            android:authorities="org.evolution.device"
+            android:authorities="org.cherish.device"
             android:exported="true"
             android:grantUriPermissions="true"
             android:multiprocess="false"

@@ -16,7 +16,7 @@
      limitations under the License.
 -->
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:settings="http://schemas.android.com/apk/res/org.cherishos.device.DeviceExtras">
+	xmlns:settings="http://schemas.android.com/apk/res/org.cherish.device.DeviceExtras">
 
     <PreferenceCategory
         android:key="display"
@@ -29,19 +29,7 @@
             android:summary="@string/ambient_display_gestures_summary"
             android:persistent="false" >
             <intent android:action="android.intent.action.MAIN"
-                    android:targetClass="org.cherishos.device.DeviceExtras.DozeSettingsActivity" />
-        </Preference>
-
-       <Preference
-            android:key="panel_modes"
-            android:icon="@drawable/ic_panel_modes"
-            android:title="@string/panel_modes_title"
-            android:summary="@string/panel_modes_summary"
-            android:persistent="false" >
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="org.cherishos.device.DeviceExtras"
-                android:targetClass="org.cherishos.device.DeviceExtras.PanelSettingsActivity" />
+                    android:targetClass="org.cherish.device.DeviceExtras.DozeSettingsActivity" />
         </Preference>
 
         <SwitchPreference
@@ -63,7 +51,7 @@
             android:title="@string/auto_hbm_title"
             android:summary="@string/auto_hbm_summary" />
 
-        <org.cherishos.device.DeviceExtras.AutoHBMThresholdPreference
+        <org.cherish.device.DeviceExtras.AutoHBMThresholdPreference
             android:key="auto_hbm_threshold"
             android:icon="@drawable/ic_autohbm_threshold"
             android:title="@string/auto_hbm_threshold_title"
