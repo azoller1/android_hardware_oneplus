@@ -45,18 +45,10 @@ import org.evolution.device.DeviceExtras.slider.RotationController;
 import org.evolution.device.DeviceExtras.slider.RingerController;
 import org.evolution.device.DeviceExtras.slider.NotificationRingerController;
 
-import vendor.oneplus.hardware.camera.V1_0.IOnePlusCameraProvider;
-
 public class KeyHandler implements DeviceKeyHandler {
     private static final String TAG = KeyHandler.class.getSimpleName();
-    private static final boolean DEBUG = false;
-
-    public static final String CLIENT_PACKAGE_NAME = "com.oneplus.camera";
-    public static final String CLIENT_PACKAGE_PATH = "/data/misc/evolution/client_package_name";
 
     private final Context mContext;
-    private ClientPackageNameObserver mClientObserver;
-    private IOnePlusCameraProvider mProvider;
     private final NotificationController mNotificationController;
     private final FlashlightController mFlashlightController;
     private final BrightnessController mBrightnessController;
@@ -170,38 +162,4 @@ public class KeyHandler implements DeviceKeyHandler {
         return null;
     }
 
-    private void onDisplayOn() {
-        if (mClientObserver == null) {
-            mClientObserver = new ClientPackageNameObserver(CLIENT_PACKAGE_PATH);
-            mClientObserver.startWatching();
-        }
-    }
-
-    private void onDisplayOff() {
-        if (mClientObserver != null) {
-            mClientObserver.stopWatching();
-            mClientObserver = null;
-        }
-    }
-
-    private class ClientPackageNameObserver extends FileObserver {
-
-        public ClientPackageNameObserver(String file) {
-            super(CLIENT_PACKAGE_PATH, MODIFY);
-        }
-
-        @Override
-        public void onEvent(int event, String file) {
-            String pkgName = FileUtils.getFileValue(CLIENT_PACKAGE_PATH, "0");
-            if (event == FileObserver.MODIFY) {
-                try {
-                    Log.d(TAG, "client_package " + file + " and " + pkgName);
-                    mProvider = IOnePlusCameraProvider.getService();
-                    mProvider.setPackageName(pkgName);
-                } catch (RemoteException e) {
-                    Log.e(TAG, "setPackageName error", e);
-                }
-            }
-        }
-    }
 }
