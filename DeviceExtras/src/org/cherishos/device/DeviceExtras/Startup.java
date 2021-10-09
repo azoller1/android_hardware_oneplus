@@ -34,14 +34,7 @@ public class Startup extends BroadcastReceiver {
     @Override
     public void onReceive(final Context context, final Intent bootintent) {
 
-        DeviceExtras.restoreSliderStates(context);
-        EarGainPreference.restore(context);
-        org.evolution.device.DeviceExtras.doze.DozeUtils.checkDozeService(context);
-        org.evolution.device.DeviceExtras.kcal.KCalSettings.restore(context);
-        MicGainPreference.restore(context);
-        VibratorCallStrengthPreference.restore(context);
-        VibratorNotifStrengthPreference.restore(context);
-        VibratorStrengthPreference.restore(context);
+        org.cherishos.device.DeviceExtras.doze.DozeUtils.checkDozeService(context);
 
         boolean enabled = false;
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -58,32 +51,6 @@ public class Startup extends BroadcastReceiver {
         if (enabled) {
         restore(HBMModeSwitch.getFile(context), enabled);
                }
-        enabled = sharedPrefs.getBoolean(DeviceExtras.KEY_FPS_INFO, false);
-        if (enabled) {
-            context.startService(new Intent(context, FPSInfoService.class));
-               }
-        enabled = sharedPrefs.getBoolean(DeviceExtras.KEY_GAME_SWITCH, false);
-        if (enabled) {
-            restore(GameModeSwitch.getFile(context), enabled);
-               }
-        enabled = sharedPrefs.getBoolean(DeviceExtras.KEY_SRGB_SWITCH, false);
-        if (enabled) {
-        mHBM = false;
-        restore(SRGBModeSwitch.getFile(context), enabled);
- 	       }
-        enabled = sharedPrefs.getBoolean(DeviceExtras.KEY_TOUCH_BOOST_SWITCH, false);
-        if (enabled) {
-        restore(TouchboostModeSwitch.getFile(context), enabled);
-               }
-        enabled = sharedPrefs.getBoolean(DeviceExtras.KEY_USB2_SWITCH, false);
-        if (enabled) {
-        restore(USB2FastChargeModeSwitch.getFile(context), enabled);
-               }
-        enabled = sharedPrefs.getBoolean(DeviceExtras.KEY_WIDE_SWITCH, false);
-        if (enabled) {
-        mHBM = false;
-        restore(WideModeSwitch.getFile(context), enabled);
-        }
     }
 
     private void restore(String file, boolean enabled) {
