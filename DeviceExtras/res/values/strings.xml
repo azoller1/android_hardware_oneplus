@@ -31,12 +31,6 @@
     <string name="auto_hbm_summary">Enable peak luminance based on sunlight</string>
     <string name="auto_hbm_threshold_title"></string>
     <string name="auto_hbm_threshold_summary">threshold (lux)</string>
-    <string name="panel_modes_title">Panel modes</string>
-    <string name="panel_modes_summary">Modes for panel color correction</string>
-    <string name="off_mode_title">Off</string>
-    <string name="srgb_mode_title">sRGB mode</string>
-    <string name="dci_mode_title">DCI-P3 wide colour gamut mode</string>
-    <string name="wide_mode_title">Wide colour mode</string>
 
     <!-- Doze -->
     <string name="ambient_display_title">Ambient display</string>

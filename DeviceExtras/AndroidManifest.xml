@@ -38,7 +38,15 @@
         android:label="@string/device_title"
         android:theme="@style/AppTheme"
         android:defaultToDeviceProtectedStorage="true"
-        android:directBootAware="true">
+        android:directBootAware="true"
+        android:width="@dimen/dashboard_tile_foreground_image_size"
+        android:height="@dimen/dashboard_tile_foreground_image_size"
+        android:start="@dimen/dashboard_tile_foreground_image_inset"
+        android:top="@dimen/dashboard_tile_foreground_image_inset">
+
+ <!--       <com.android.settingslib.widget.AdaptiveIconShapeDrawable
+            android:width="@dimen/dashboard_tile_image_size"
+        android:height="@dimen/dashboard_tile_image_size" /> -->
 
         <receiver
             android:name=".Startup"

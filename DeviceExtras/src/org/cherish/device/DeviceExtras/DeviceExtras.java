@@ -188,7 +188,7 @@ public class DeviceExtras extends PreferenceFragment
             Boolean enabled = (Boolean) newValue;
             FileUtils.writeValue(HBMModeSwitch.getFile(getContext()), enabled ? "5" : "0");
             Intent hbmIntent = new Intent(this.getContext(),
-                    org.cherishos.device.DeviceExtras.HBMModeService.class);
+                    org.cherish.device.DeviceExtras.HBMModeService.class);
             if (enabled) {
                 this.getContext().startService(hbmIntent);
             } else {
