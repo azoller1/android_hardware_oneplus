@@ -1,0 +1,3 @@
+-keep class org.spark.device.DeviceExtras.* {
+  *;
+}
