@@ -21,9 +21,6 @@ import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 
-import org.evolution.oneplus.DeviceExtras.Constants;
-import org.evolution.oneplus.DeviceExtras.SliderControllerBase;
-
 public final class BrightnessController extends SliderControllerBase {
 
     public static final int ID = 3;
@@ -48,19 +45,19 @@ public final class BrightnessController extends SliderControllerBase {
             case BRIGHTNESS_AUTO:
                 if (writeSettings(Settings.System.SCREEN_BRIGHTNESS_MODE,
                         Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC))
-                    return Constants.MODE_BRIGHTNESS_AUTO;
+                    return SliderConstants.MODE_BRIGHTNESS_AUTO;
                 break;
             case BRIGHTNESS_BRIGHTEST:
                 if (writeSettings(Settings.System.SCREEN_BRIGHTNESS_MODE,
                         Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL) &&
                     writeSettings(Settings.System.SCREEN_BRIGHTNESS, BRIGHTEST))
-                    return Constants.MODE_BRIGHTNESS_BRIGHT;
+                    return SliderConstants.MODE_BRIGHTNESS_BRIGHT;
                 break;
             case BRIGHTNESS_DARKEST:
                 if (writeSettings(Settings.System.SCREEN_BRIGHTNESS_MODE,
                         Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL) &&
                     writeSettings(Settings.System.SCREEN_BRIGHTNESS, DARKEST))
-                    return Constants.MODE_BRIGHTNESS_DARK;
+                    return SliderConstants.MODE_BRIGHTNESS_DARK;
                 break;
             default:
                 return 0;

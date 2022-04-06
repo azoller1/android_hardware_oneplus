@@ -15,9 +15,12 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *
 */
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.modeswitch;
 
 import android.content.Context;
+
+import org.evolution.oneplus.DeviceExtras.FileUtils;
+import org.evolution.oneplus.DeviceExtras.R;
 
 public class HBMModeSwitch {
 

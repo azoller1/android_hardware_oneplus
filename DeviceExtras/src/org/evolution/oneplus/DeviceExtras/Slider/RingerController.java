@@ -21,9 +21,6 @@ import android.media.AudioManager;
 import android.util.Log;
 import android.util.SparseIntArray;
 
-import org.evolution.oneplus.DeviceExtras.Constants;
-import org.evolution.oneplus.DeviceExtras.SliderControllerBase;
-
 public final class RingerController extends SliderControllerBase {
 
     public static final int ID = 5;
@@ -55,11 +52,11 @@ public final class RingerController extends SliderControllerBase {
             mAudioManager.setRingerModeInternal(MODES.get(action));
             switch (action) {
                 case RINGER_NORMAL:
-                    return Constants.MODE_RING;
+                    return SliderConstants.MODE_RING;
                 case RINGER_VIBRATE:
-                    return Constants.MODE_VIBRATE;
+                    return SliderConstants.MODE_VIBRATE;
                 case RINGER_SILENT:
-                    return Constants.MODE_SILENT;
+                    return SliderConstants.MODE_SILENT;
             }
         }
         return 0;

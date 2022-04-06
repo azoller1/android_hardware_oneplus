@@ -16,7 +16,7 @@
 * along with this program. If not, see <http://www.gnu.com/licenses/>.
 *
 */
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.preferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -24,6 +24,10 @@ import android.os.Vibrator;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
+
+import org.evolution.oneplus.DeviceExtras.DeviceExtras;
+import org.evolution.oneplus.DeviceExtras.FileUtils;
+import org.evolution.oneplus.DeviceExtras.R;
 
 public class VibratorStrengthPreference extends CustomSeekBarPreference {
 

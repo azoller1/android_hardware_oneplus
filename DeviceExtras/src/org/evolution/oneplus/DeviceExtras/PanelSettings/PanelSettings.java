@@ -15,7 +15,7 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *
 */
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.panelsettings;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -47,6 +47,13 @@ import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceScreen;
 import androidx.preference.TwoStatePreference;
 import androidx.viewpager.widget.ViewPager;
+
+import org.evolution.oneplus.DeviceExtras.DeviceExtras;
+import org.evolution.oneplus.DeviceExtras.FileUtils;
+import org.evolution.oneplus.DeviceExtras.modeswitch.DCIModeSwitch;
+import org.evolution.oneplus.DeviceExtras.modeswitch.SRGBModeSwitch;
+import org.evolution.oneplus.DeviceExtras.modeswitch.WideModeSwitch;
+import org.evolution.oneplus.DeviceExtras.R;
 
 public class PanelSettings extends PreferenceFragment implements RadioGroup.OnCheckedChangeListener {
     private RadioGroup mRadioGroup;

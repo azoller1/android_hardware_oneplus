@@ -23,9 +23,6 @@ import android.view.IWindowManager;
 import android.view.Surface;
 import android.view.WindowManagerGlobal;
 
-import org.evolution.oneplus.DeviceExtras.Constants;
-import org.evolution.oneplus.DeviceExtras.SliderControllerBase;
-
 public final class RotationController extends SliderControllerBase {
 
     public static final int ID = 4;
@@ -46,13 +43,13 @@ public final class RotationController extends SliderControllerBase {
         Log.d(TAG, "slider action: " + action);
         switch (action) {
             case ROTATION_AUTO:
-                return setRotation(false, 0) ? Constants.MODE_ROTATION_AUTO : 0;
+                return setRotation(false, 0) ? SliderConstants.MODE_ROTATION_AUTO : 0;
             case ROTATION_0:
-                return setRotation(true, Surface.ROTATION_0) ? Constants.MODE_ROTATION_0 : 0;
+                return setRotation(true, Surface.ROTATION_0) ? SliderConstants.MODE_ROTATION_0 : 0;
             case ROTATION_90:
-                return setRotation(true, Surface.ROTATION_90) ? Constants.MODE_ROTATION_90 : 0;
+                return setRotation(true, Surface.ROTATION_90) ? SliderConstants.MODE_ROTATION_90 : 0;
             case ROTATION_270:
-                return setRotation(true, Surface.ROTATION_270) ? Constants.MODE_ROTATION_270 : 0;
+                return setRotation(true, Surface.ROTATION_270) ? SliderConstants.MODE_ROTATION_270 : 0;
         }
         return 0;
     }

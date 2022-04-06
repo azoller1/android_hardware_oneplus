@@ -14,10 +14,9 @@
  * limitations under the License.
  */
 
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.slider;
 
-import java.util.HashMap;
-import java.util.Map;
+import android.media.AudioManager;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -26,9 +25,10 @@ import android.provider.Settings;
 import androidx.preference.SwitchPreference;
 import androidx.preference.PreferenceManager;
 
-import android.media.AudioManager;
+import java.util.HashMap;
+import java.util.Map;
 
-public class Constants {
+public class SliderConstants {
 
     public static final String SLIDER_STATE
             = "/sys/devices/platform/soc/soc:tri_state_key/tri_state";
@@ -49,8 +49,8 @@ public class Constants {
     public static final String NOTIF_SLIDER_FOR_RINGER = "5";
     public static final String NOTIF_SLIDER_FOR_NOTIFICATION_RINGER = "6";
 
-    public static final String ACTION_UPDATE_SLIDER_POSITION = "org.evolution.oneplus.DeviceExtras.UPDATE_SLIDER_POSITION";
-    public static final String ACTION_UPDATE_SLIDER_SETTINGS = "org.evolution.oneplus.DeviceExtras.UPDATE_SLIDER_SETTINGS";
+    public static final String ACTION_UPDATE_SLIDER_POSITION = "org.evolution.oneplus.DeviceExtras.slider.UPDATE_SLIDER_POSITION";
+    public static final String ACTION_UPDATE_SLIDER_SETTINGS = "org.evolution.oneplus.DeviceExtras.slider.UPDATE_SLIDER_SETTINGS";
     public static final String EXTRA_SLIDER_POSITION = "position";
     public static final String EXTRA_SLIDER_POSITION_VALUE = "position_value";
 

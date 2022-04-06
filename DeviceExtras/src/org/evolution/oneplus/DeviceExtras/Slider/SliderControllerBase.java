@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.slider;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +23,7 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.util.Log;
 
-import org.evolution.oneplus.DeviceExtras.Constants;
+import org.evolution.oneplus.DeviceExtras.FileUtils;
 
 public abstract class SliderControllerBase {
 
@@ -38,7 +38,6 @@ public abstract class SliderControllerBase {
             VibrationEffect.get(VibrationEffect.EFFECT_HEAVY_CLICK);
     private static final VibrationEffect MODE_VIBRATION_EFFECT =
             VibrationEffect.get(VibrationEffect.EFFECT_DOUBLE_CLICK);
-
 
     protected final Context mContext;
     private final Vibrator mVibrator;
@@ -94,7 +93,7 @@ public abstract class SliderControllerBase {
         if (result > 0)
             sendUpdateBroadcast(context, position, result);
     }
-    
+
     private void doHapticFeedback(VibrationEffect effect) {
         if (mVibrator != null && mVibrator.hasVibrator()) {
             mVibrator.vibrate(effect);
@@ -102,9 +101,9 @@ public abstract class SliderControllerBase {
     }
 
     public static void sendUpdateBroadcast(Context context, int position, int result) {
-        Intent intent = new Intent(Constants.ACTION_UPDATE_SLIDER_POSITION);
-        intent.putExtra(Constants.EXTRA_SLIDER_POSITION, position);
-        intent.putExtra(Constants.EXTRA_SLIDER_POSITION_VALUE, result);
+        Intent intent = new Intent(SliderConstants.ACTION_UPDATE_SLIDER_POSITION);
+        intent.putExtra(SliderConstants.EXTRA_SLIDER_POSITION, position);
+        intent.putExtra(SliderConstants.EXTRA_SLIDER_POSITION_VALUE, result);
         context.sendBroadcastAsUser(intent, UserHandle.CURRENT);
         intent.setFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY);
         Log.d(TAG, "slider change to positon " + position);
@@ -118,7 +117,7 @@ public abstract class SliderControllerBase {
         }
 
         try {
-            int state = Integer.parseInt(FileUtils.readOneLine(Constants.SLIDER_STATE));
+            int state = Integer.parseInt(FileUtils.readOneLine(SliderConstants.SLIDER_STATE));
             processAction(mActions[state - 1]);
         } catch (Exception e) {
             Log.e(TAG, "Failed to restore slider state", e);

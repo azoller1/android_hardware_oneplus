@@ -25,6 +25,11 @@ import android.content.SharedPreferences;
 import android.provider.Settings;
 import androidx.preference.PreferenceManager;
 
+import org.evolution.oneplus.DeviceExtras.FileUtils;
+import org.evolution.oneplus.DeviceExtras.modeswitch.*;
+import org.evolution.oneplus.DeviceExtras.preferences.*;
+import org.evolution.oneplus.DeviceExtras.services.FPSInfoService;
+
 public class Startup extends BroadcastReceiver {
 
     private static final String TAG = "BootReceiver";
@@ -38,7 +43,7 @@ public class Startup extends BroadcastReceiver {
         EarGainPreference.restore(context);
         org.evolution.oneplus.DeviceExtras.doze.DozeUtils.checkDozeService(context);
         MicGainPreference.restore(context);
-        org.evolution.oneplus.DeviceExtras.TouchscreenGestureSettings.MainSettingsFragment.restoreTouchscreenGestureStates(context);
+        org.evolution.oneplus.DeviceExtras.touch.TouchscreenGestureSettings.MainSettingsFragment.restoreTouchscreenGestureStates(context);
         VibratorCallStrengthPreference.restore(context);
         VibratorNotifStrengthPreference.restore(context);
         VibratorStrengthPreference.restore(context);

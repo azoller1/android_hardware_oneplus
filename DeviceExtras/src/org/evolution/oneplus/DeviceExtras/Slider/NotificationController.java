@@ -24,9 +24,6 @@ import android.provider.Settings;
 import android.util.Log;
 import android.util.SparseIntArray;
 
-import org.evolution.oneplus.DeviceExtras.Constants;
-import org.evolution.oneplus.DeviceExtras.SliderControllerBase;
-
 public final class NotificationController extends SliderControllerBase {
 
     public static final int ID = 1;
@@ -75,11 +72,11 @@ public final class NotificationController extends SliderControllerBase {
             }, CHANGE_DELAY);
             switch (action) {
                 case NOTIFICATION_TOTAL_SILENCE:
-                    return Constants.MODE_TOTAL_SILENCE;
+                    return SliderConstants.MODE_TOTAL_SILENCE;
                 case NOTIFICATION_PRIORITY_ONLY:
-                    return Constants.MODE_PRIORITY_ONLY;
+                    return SliderConstants.MODE_PRIORITY_ONLY;
                 case NOTIFICATION_ALL:
-                    return Constants.MODE_NONE;
+                    return SliderConstants.MODE_NONE;
             }
         }
         return 0;

@@ -15,11 +15,11 @@
  * limitations under the License.
  */
 
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.touch;
 
 class TouchscreenGestureConstants {
     // Broadcast action for settings update
-    static final String UPDATE_PREFS_ACTION = " org.evolution.oneplus.DeviceExtras.UPDATE_SETTINGS";
+    static final String UPDATE_PREFS_ACTION = " org.evolution.oneplus.DeviceExtras.touch.UPDATE_SETTINGS";
     // Broadcast extra: keycode mapping (int[]: key = gesture ID, value = keycode)
     static final String UPDATE_EXTRA_KEYCODE_MAPPING = "keycode_mappings";
     // Broadcast extra: assigned actions (int[]: key = gesture ID, value = action)

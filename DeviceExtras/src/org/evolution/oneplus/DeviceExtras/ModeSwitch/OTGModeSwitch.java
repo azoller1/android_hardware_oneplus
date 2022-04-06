@@ -16,7 +16,7 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *
 */
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.modeswitch;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -24,6 +24,8 @@ import androidx.preference.Preference;
 import androidx.preference.Preference.OnPreferenceChangeListener;
 
 import org.evolution.oneplus.DeviceExtras.DeviceExtras;
+import org.evolution.oneplus.DeviceExtras.FileUtils;
+import org.evolution.oneplus.DeviceExtras.R;
 
 public class OTGModeSwitch implements OnPreferenceChangeListener {
 

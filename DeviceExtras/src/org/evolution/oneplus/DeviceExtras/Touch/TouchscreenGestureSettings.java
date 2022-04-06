@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.touch;
 
 import android.app.Fragment;
 import android.content.Context;

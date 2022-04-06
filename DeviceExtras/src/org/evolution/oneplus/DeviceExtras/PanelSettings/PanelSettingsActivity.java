@@ -15,7 +15,7 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *
 */
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.panelsettings;
 
 import android.app.Fragment;
 import android.os.Bundle;

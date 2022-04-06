@@ -15,7 +15,7 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *
 */
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.services;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -24,7 +24,9 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.IBinder;
 
-import org.evolution.oneplus.DeviceExtras.HBMModeSwitch;
+import org.evolution.oneplus.DeviceExtras.modeswitch.HBMModeSwitch;
+import org.evolution.oneplus.DeviceExtras.FileUtils;
+import org.evolution.oneplus.DeviceExtras.R;
 
 public class HBMModeService extends Service {
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.slider;
 
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.media.AudioManager;
-import android.os.FileObserver;
 import android.os.RemoteException;
 import android.os.UserHandle;
 import android.os.Vibrator;
@@ -36,22 +35,13 @@ import com.android.internal.os.DeviceKeyHandler;
 
 import java.util.Arrays;
 
-import org.evolution.oneplus.DeviceExtras.Constants;
-import org.evolution.oneplus.DeviceExtras.SliderControllerBase;
-import org.evolution.oneplus.DeviceExtras.slider.*;
-
-import vendor.oneplus.hardware.camera.V1_0.IOnePlusCameraProvider;
+import org.evolution.oneplus.DeviceExtras.FileUtils;
 
 public class KeyHandler implements DeviceKeyHandler {
     private static final String TAG = KeyHandler.class.getSimpleName();
     private static final boolean DEBUG = false;
 
-    public static final String CLIENT_PACKAGE_NAME = "com.oneplus.camera";
-    public static final String CLIENT_PACKAGE_PATH = "/data/misc/evolution/client_package_name";
-
     private final Context mContext;
-    private ClientPackageNameObserver mClientObserver;
-    private IOnePlusCameraProvider mProvider;
     private final NotificationController mNotificationController;
     private final FlashlightController mFlashlightController;
     private final BrightnessController mBrightnessController;
@@ -64,8 +54,8 @@ public class KeyHandler implements DeviceKeyHandler {
     private final BroadcastReceiver mSliderUpdateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int usage = intent.getIntExtra(Constants.EXTRA_SLIDER_USAGE, 0);
-            int[] actions = intent.getIntArrayExtra(Constants.EXTRA_SLIDER_ACTIONS);
+            int usage = intent.getIntExtra(SliderConstants.EXTRA_SLIDER_USAGE, 0);
+            int[] actions = intent.getIntArrayExtra(SliderConstants.EXTRA_SLIDER_ACTIONS);
 
             Log.d(TAG, "update usage " + usage + " with actions " +
                     Arrays.toString(actions));
@@ -105,17 +95,6 @@ public class KeyHandler implements DeviceKeyHandler {
         }
     };
 
-    private BroadcastReceiver mSystemStateReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
-                onDisplayOn();
-            } else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
-                onDisplayOff();
-            }
-        }
-    };
-
     public KeyHandler(Context context) {
         mContext = context;
 
@@ -127,15 +106,7 @@ public class KeyHandler implements DeviceKeyHandler {
         mNotificationRingerController = new NotificationRingerController(mContext);
 
         mContext.registerReceiver(mSliderUpdateReceiver,
-                new IntentFilter(Constants.ACTION_UPDATE_SLIDER_SETTINGS));
-
-        if (PackageUtils.isAvailableApp(CLIENT_PACKAGE_NAME, mContext)) {
-            IntentFilter systemStateFilter = new IntentFilter(Intent.ACTION_SCREEN_ON);
-            systemStateFilter.addAction(Intent.ACTION_SCREEN_OFF);
-            mContext.registerReceiver(mSystemStateReceiver, systemStateFilter);
-            mClientObserver = new ClientPackageNameObserver(CLIENT_PACKAGE_PATH);
-            mClientObserver.startWatching();
-        }
+                new IntentFilter(SliderConstants.ACTION_UPDATE_SLIDER_SETTINGS));
     }
 
     private boolean hasSetupCompleted() {
@@ -163,40 +134,5 @@ public class KeyHandler implements DeviceKeyHandler {
         mSliderController.processEvent(mContext, scanCode);
 
         return null;
-    }
-
-    private void onDisplayOn() {
-        if (mClientObserver == null) {
-            mClientObserver = new ClientPackageNameObserver(CLIENT_PACKAGE_PATH);
-            mClientObserver.startWatching();
-        }
-    }
-
-    private void onDisplayOff() {
-        if (mClientObserver != null) {
-            mClientObserver.stopWatching();
-            mClientObserver = null;
-        }
-    }
-
-    private class ClientPackageNameObserver extends FileObserver {
-
-        public ClientPackageNameObserver(String file) {
-            super(CLIENT_PACKAGE_PATH, MODIFY);
-        }
-
-        @Override
-        public void onEvent(int event, String file) {
-            String pkgName = FileUtils.getFileValue(CLIENT_PACKAGE_PATH, "0");
-            if (event == FileObserver.MODIFY) {
-                try {
-                    Log.d(TAG, "client_package " + file + " and " + pkgName);
-                    mProvider = IOnePlusCameraProvider.getService();
-                    mProvider.setPackageName(pkgName);
-                } catch (RemoteException e) {
-                    Log.e(TAG, "setPackageName error", e);
-                }
-            }
-        }
     }
 }

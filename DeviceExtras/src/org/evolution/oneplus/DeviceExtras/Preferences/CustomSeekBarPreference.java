@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.preferences;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -30,6 +30,8 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.evolution.oneplus.DeviceExtras.DeviceExtras;
+import org.evolution.oneplus.DeviceExtras.FileUtils;
 import org.evolution.oneplus.DeviceExtras.R;
 
 public class CustomSeekBarPreference extends Preference implements SeekBar.OnSeekBarChangeListener {

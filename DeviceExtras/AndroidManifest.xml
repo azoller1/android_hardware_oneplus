@@ -8,7 +8,9 @@
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
+
           http://www.apache.org/licenses/LICENSE-2.0
+
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,13 +30,13 @@
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
 
     <permission
-        android:name="org.evolution.oneplus.DeviceExtras.TRIGGER_SCREEN_OFF_GESTURE"
+        android:name="org.evolution.oneplus.DeviceExtras.touch.TRIGGER_SCREEN_OFF_GESTURE"
         android:protectionLevel="signatureOrSystem" />
 
     <protected-broadcast android:name="com.android.systemui.doze.pulse" />
-    <protected-broadcast android:name="org.evolution.oneplus.DeviceExtras.UPDATE_SETTINGS" />
-    <protected-broadcast android:name="org.evolution.oneplus.DeviceExtras.UPDATE_SLIDER_POSITION" />
-    <protected-broadcast android:name="org.evolution.oneplus.DeviceExtras.UPDATE_SLIDER_SETTINGS" />
+    <protected-broadcast android:name="org.evolution.oneplus.DeviceExtras.slider.UPDATE_SLIDER_POSITION" />
+    <protected-broadcast android:name="org.evolution.oneplus.DeviceExtras.slider.UPDATE_SLIDER_SETTINGS" />
+    <protected-broadcast android:name="org.evolution.oneplus.DeviceExtras.touch.UPDATE_SETTINGS" />
 
     <uses-sdk
         android:minSdkVersion="28"
@@ -62,7 +64,11 @@
         <activity 
             android:name=".DeviceExtras" />
         <activity 
-            android:name=".KeyHandler" />
+            android:name=".camera.KeyHandler" />
+        <activity
+            android:name=".slider.KeyHandler" />
+        <activity
+            android:name=".touch.KeyHandler" />
 
         <!-- DeviceExtras -->
         <activity
@@ -85,7 +91,7 @@
 
         <!-- Panel Settings Activity -->
         <activity
-            android:name=".PanelSettingsActivity"
+            android:name=".panelsettings.PanelSettingsActivity"
             android:exported="true"
             android:label="@string/panel_modes_title" >
             <intent-filter>
@@ -96,7 +102,7 @@
 
         <!-- Touch Gesture Settings Activity -->
         <activity
-            android:name=".TouchscreenGestureSettings"
+            android:name=".touch.TouchscreenGestureSettings"
             android:label="@string/touchscreen_gesture_settings_title"
             android:theme="@style/Theme.SubSettingsBase">
             <intent-filter>
@@ -106,8 +112,8 @@
         </activity>
 
         <activity
-            android:name=".ScreenOffLaunchGestureActivity"
-            android:permission="org.evolution.oneplus.DeviceExtras.TRIGGER_SCREEN_OFF_GESTURE"
+            android:name=".touch.ScreenOffLaunchGestureActivity"
+            android:permission="org.evolution.oneplus.DeviceExtras.touch.TRIGGER_SCREEN_OFF_GESTURE"
             android:excludeFromRecents="true"
             android:exported="true"
             android:label="@string/touchscreen_gesture_settings_title"
@@ -132,17 +138,17 @@
 
         <!-- FPS info service -->
         <service
-            android:name=".FPSInfoService"
+            android:name=".services.FPSInfoService"
             android:exported="false" />
 
         <!-- HBM Service -->
         <service
-            android:name=".HBMModeService"
+            android:name=".services.HBMModeService"
             android:exported="false" />
 
         <!-- Auto HBM service -->
         <service
-            android:name=".AutoHBMService"
+            android:name=".services.AutoHBMService"
             android:exported="false" />
 
         <!-- Search indexing -->

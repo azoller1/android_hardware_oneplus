@@ -1,4 +1,4 @@
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.touch;
 
 import android.app.KeyguardManager;
 import android.content.Context;

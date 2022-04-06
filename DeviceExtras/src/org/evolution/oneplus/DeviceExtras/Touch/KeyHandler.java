@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.touch;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -46,9 +46,9 @@ import android.view.KeyEvent;
 
 import com.android.internal.os.DeviceKeyHandler;
 
-public class TouchKeyHandler implements DeviceKeyHandler {
+public class KeyHandler implements DeviceKeyHandler {
 
-    private static final String TAG = TouchKeyHandler.class.getSimpleName();
+    private static final String TAG = KeyHandler.class.getSimpleName();
 
     private static final String GESTURE_WAKEUP_REASON = "touchscreen-gesture-wakeup";
     private static final String PULSE_ACTION = "com.android.systemui.doze.pulse";
@@ -88,7 +88,7 @@ public class TouchKeyHandler implements DeviceKeyHandler {
         }
     };
 
-    public TouchKeyHandler(final Context context) {
+    public KeyHandler(final Context context) {
         mContext = context;
 
         mAudioManager = mContext.getSystemService(AudioManager.class);

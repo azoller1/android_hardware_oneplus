@@ -15,13 +15,17 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *
 */
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.preferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.AttributeSet;
 import androidx.preference.PreferenceManager;
+
+import org.evolution.oneplus.DeviceExtras.DeviceExtras;
+import org.evolution.oneplus.DeviceExtras.FileUtils;
+import org.evolution.oneplus.DeviceExtras.R;
 
 public class AutoHBMThresholdPreference extends CustomSeekBarPreference {
 

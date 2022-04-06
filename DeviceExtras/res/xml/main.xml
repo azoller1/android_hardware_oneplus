@@ -7,7 +7,9 @@
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
      You may obtain a copy of the License at
+
           http://www.apache.org/licenses/LICENSE-2.0
+
      Unless required by applicable law or agreed to in writing, software
      distributed under the License is distributed on an "AS IS" BASIS,
      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -75,7 +77,7 @@
             android:summary="@string/ambient_display_gestures_summary"
             android:persistent="false" >
             <intent android:action="android.intent.action.MAIN"
-                    android:targetClass="org.evolution.oneplus.DeviceExtras.DozeSettingsActivity" />
+                    android:targetClass="org.evolution.oneplus.DeviceExtras.doze.DozeSettingsActivity" />
         </Preference>
 
        <Preference
@@ -83,10 +85,9 @@
             android:title="@string/panel_modes_title"
             android:summary="@string/panel_modes_summary"
             android:persistent="false" >
-            <intent
-                android:action="android.intent.action.MAIN"
-                android:targetPackage="org.evolution.oneplus.DeviceExtras"
-                android:targetClass="org.evolution.oneplus.DeviceExtras.PanelSettingsActivity" />
+            <intent android:action="android.intent.action.MAIN"
+                    android:targetPackage="org.evolution.oneplus.DeviceExtras"
+                    android:targetClass="org.evolution.oneplus.DeviceExtras.panelsettings.PanelSettingsActivity" />
         </Preference>
 
         <SwitchPreference
@@ -105,7 +106,7 @@
             android:title="@string/auto_hbm_title"
             android:summary="@string/auto_hbm_summary" />
 
-        <org.evolution.oneplus.DeviceExtras.AutoHBMThresholdPreference
+        <org.evolution.oneplus.DeviceExtras.preferences.AutoHBMThresholdPreference
             android:key="auto_hbm_threshold"
             android:title="@string/auto_hbm_threshold_title"
             android:summary="@string/auto_hbm_threshold_summary" />
@@ -144,7 +145,7 @@
             android:entries="@array/fps_info_color_entries"
             android:entryValues="@array/fps_info_color_values" />
 
-        <org.evolution.oneplus.DeviceExtras.CustomSeekBarPreference
+        <org.evolution.oneplus.DeviceExtras.preferences.CustomSeekBarPreference
             android:key="fps_info_text_size"
             android:title="@string/fps_info_text_size_title"
             android:persistent="true"
@@ -166,7 +167,7 @@
             android:persistent="false" >
             <intent android:action="android.intent.action.MAIN"
                     android:targetPackage="org.evolution.oneplus.DeviceExtras"
-                    android:targetClass="org.evolution.oneplus.DeviceExtras.TouchscreenGestureSettings" />
+                    android:targetClass="org.evolution.oneplus.DeviceExtras.touch.TouchscreenGestureSettings" />
         </Preference>
 
         <SwitchPreference
@@ -191,12 +192,12 @@
         android:key="speaker"
         android:title="@string/category_speaker">
 
-        <org.evolution.oneplus.DeviceExtras.EarGainPreference
+        <org.evolution.oneplus.DeviceExtras.preferences.EarGainPreference
             android:key="earpiece_gain"
             android:title="@string/ear_gain_title"
             android:summary="@string/ear_gain_summary" />
 
-        <org.evolution.oneplus.DeviceExtras.MicGainPreference
+        <org.evolution.oneplus.DeviceExtras.preferences.MicGainPreference
             android:key="microphone_gain"
             android:title="@string/mic_gain_title"
             android:summary="@string/mic_gain_summary" />
@@ -223,17 +224,17 @@
         android:key="vibrator"
         android:title="@string/category_vibrator">
 
-        <org.evolution.oneplus.DeviceExtras.VibratorStrengthPreference
+        <org.evolution.oneplus.DeviceExtras.preferences.VibratorStrengthPreference
             android:key="vib_strength"
             android:title="@string/vib_strength_title"
             android:summary="@string/vib_strength_summary" />
 
-        <org.evolution.oneplus.DeviceExtras.VibratorCallStrengthPreference
+        <org.evolution.oneplus.DeviceExtras.preferences.VibratorCallStrengthPreference
             android:key="vib_call_strength"
             android:title="@string/vib_call_strength_title"
             android:summary="@string/vib_call_strength_summary" />
 
-        <org.evolution.oneplus.DeviceExtras.VibratorNotifStrengthPreference
+        <org.evolution.oneplus.DeviceExtras.preferences.VibratorNotifStrengthPreference
             android:key="vib_notif_strength"
             android:title="@string/vib_notif_strength_title"
             android:summary="@string/vib_notif_strength_summary" />

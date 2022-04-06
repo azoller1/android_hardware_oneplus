@@ -16,52 +16,46 @@
 * along with this program. If not, see <http://www.gnu.com/licenses/>.
 *
 */
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.preferences;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Vibrator;
 import androidx.preference.PreferenceManager;
 import androidx.preference.PreferenceViewHolder;
 import android.util.AttributeSet;
 
 import java.util.List;
 
-public class VibratorCallStrengthPreference extends CustomSeekBarPreference {
+import org.evolution.oneplus.DeviceExtras.DeviceExtras;
+import org.evolution.oneplus.DeviceExtras.FileUtils;
+import org.evolution.oneplus.DeviceExtras.R;
 
-    private Vibrator mVibrator;
+public class MicGainPreference extends CustomSeekBarPreference {
 
-    private static final int NODE_LEVEL = R.string.node_vibrator_call_strength_preference;
-    private static long testVibrationPattern[];
     private static int mDefVal;
 
-    public VibratorCallStrengthPreference(Context context, AttributeSet attrs) {
+    private static final int NODE_LEVEL = R.string.node_mic_gain_preference;
+
+    public MicGainPreference(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        mInterval = context.getResources().getInteger(R.integer.vibrator_call_strength_preference_interval);
+        mInterval = context.getResources().getInteger(R.integer.mic_gain_preference_interval);
         mShowSign = false;
         mUnits = "";
         mContinuousUpdates = false;
-        int[] mAllValues = context.getResources().getIntArray(R.array.vibrator_call_strength_preference_array);
+        int[] mAllValues = context.getResources().getIntArray(R.array.mic_gain_preference_array);
         mMinValue = mAllValues[1];
         mMaxValue = mAllValues[2];
         mDefaultValueExists = true;
-        mDefaultValue = mAllValues[0];
         mDefVal = mAllValues[0];
+        mDefaultValue = mDefVal;
         mValue = Integer.parseInt(loadValue(context));
-        int[] tempVibrationPattern = context.getResources().getIntArray(R.array.test_vibration_pattern);
-        testVibrationPattern = new long[tempVibrationPattern.length];
-        for (int i = 0; i < tempVibrationPattern.length; i++) {
-            testVibrationPattern[i] = tempVibrationPattern[i];
-        }
 
         setPersistent(false);
-
-        mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
     private static String getFile(Context context) {
-        String file = context.getString(NODE_LEVEL);
+        String file = context.getResources().getString(NODE_LEVEL);
         if (FileUtils.fileWritable(file)) {
             return file;
         }
@@ -77,7 +71,7 @@ public class VibratorCallStrengthPreference extends CustomSeekBarPreference {
             return;
         }
 
-        String storedValue = PreferenceManager.getDefaultSharedPreferences(context).getString(DeviceExtras.KEY_CALL_VIBSTRENGTH , String.valueOf(mDefVal));
+        String storedValue = PreferenceManager.getDefaultSharedPreferences(context).getString(DeviceExtras.KEY_MIC_GAIN, String.valueOf(mDefVal));
         FileUtils.writeValue(getFile(context), storedValue);
     }
 
@@ -88,9 +82,8 @@ public class VibratorCallStrengthPreference extends CustomSeekBarPreference {
     private void saveValue(String newValue) {
         FileUtils.writeValue(getFile(getContext()), newValue);
         SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(getContext()).edit();
-        editor.putString(DeviceExtras.KEY_CALL_VIBSTRENGTH, newValue);
+        editor.putString(DeviceExtras.KEY_MIC_GAIN, newValue);
         editor.apply();
-        mVibrator.vibrate(testVibrationPattern, -1);
     }
 
     @Override

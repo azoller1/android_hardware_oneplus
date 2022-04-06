@@ -42,10 +42,15 @@ import androidx.preference.TwoStatePreference;
 
 import java.util.Arrays;
 
-import org.evolution.oneplus.DeviceExtras.Constants;
 import org.evolution.oneplus.DeviceExtras.doze.DozeSettingsActivity;
 import org.evolution.oneplus.DeviceExtras.FileUtils;
+import org.evolution.oneplus.DeviceExtras.modeswitch.*;
+import org.evolution.oneplus.DeviceExtras.panelsettings.PanelSettingsActivity;
+import org.evolution.oneplus.DeviceExtras.preferences.*;
 import org.evolution.oneplus.DeviceExtras.R;
+import org.evolution.oneplus.DeviceExtras.services.*;
+import org.evolution.oneplus.DeviceExtras.slider.SliderConstants;
+import org.evolution.oneplus.DeviceExtras.touch.TouchscreenGestureSettings;
 
 public class DeviceExtras extends PreferenceFragment
         implements Preference.OnPreferenceChangeListener {
@@ -378,13 +383,13 @@ public class DeviceExtras extends PreferenceFragment
     }
 
     private void initNotificationSliderPreference() {
-        registerPreferenceListener(Constants.NOTIF_SLIDER_USAGE_KEY);
-        registerPreferenceListener(Constants.NOTIF_SLIDER_ACTION_TOP_KEY);
-        registerPreferenceListener(Constants.NOTIF_SLIDER_ACTION_MIDDLE_KEY);
-        registerPreferenceListener(Constants.NOTIF_SLIDER_ACTION_BOTTOM_KEY);
+        registerPreferenceListener(SliderConstants.NOTIF_SLIDER_USAGE_KEY);
+        registerPreferenceListener(SliderConstants.NOTIF_SLIDER_ACTION_TOP_KEY);
+        registerPreferenceListener(SliderConstants.NOTIF_SLIDER_ACTION_MIDDLE_KEY);
+        registerPreferenceListener(SliderConstants.NOTIF_SLIDER_ACTION_BOTTOM_KEY);
 
         ListPreference usagePref = (ListPreference) findPreference(
-                Constants.NOTIF_SLIDER_USAGE_KEY);
+                SliderConstants.NOTIF_SLIDER_USAGE_KEY);
         handleSliderUsageChange(usagePref.getValue());
     }
 
@@ -417,7 +422,7 @@ public class DeviceExtras extends PreferenceFragment
             Boolean enabled = (Boolean) newValue;
             FileUtils.writeValue(HBMModeSwitch.getFile(getContext()), enabled ? "5" : "0");
             Intent hbmIntent = new Intent(this.getContext(),
-                    org.evolution.oneplus.DeviceExtras.HBMModeService.class);
+                    org.evolution.oneplus.DeviceExtras.services.HBMModeService.class);
             if (enabled) {
                 this.getContext().startService(hbmIntent);
             } else {
@@ -427,7 +432,7 @@ public class DeviceExtras extends PreferenceFragment
           } else if (preference == mFpsInfo) {
             boolean enabled = (Boolean) newValue;
             Intent fpsinfo = new Intent(this.getContext(),
-                    org.evolution.oneplus.DeviceExtras.FPSInfoService.class);
+                    org.evolution.oneplus.DeviceExtras.services.FPSInfoService.class);
             if (enabled) {
                 this.getContext().startService(fpsinfo);
             } else {
@@ -469,27 +474,27 @@ public class DeviceExtras extends PreferenceFragment
 
         String key = preference.getKey();
         switch (key) {
-            case Constants.NOTIF_SLIDER_USAGE_KEY:
+            case SliderConstants.NOTIF_SLIDER_USAGE_KEY:
                 return handleSliderUsageChange((String) newValue) &&
                         handleSliderUsageDefaultsChange((String) newValue) &&
                         notifySliderUsageChange((String) newValue);
-            case Constants.NOTIF_SLIDER_ACTION_TOP_KEY:
+            case SliderConstants.NOTIF_SLIDER_ACTION_TOP_KEY:
                 return notifySliderActionChange(0, (String) newValue);
-            case Constants.NOTIF_SLIDER_ACTION_MIDDLE_KEY:
+            case SliderConstants.NOTIF_SLIDER_ACTION_MIDDLE_KEY:
                 return notifySliderActionChange(1, (String) newValue);
-            case Constants.NOTIF_SLIDER_ACTION_BOTTOM_KEY:
+            case SliderConstants.NOTIF_SLIDER_ACTION_BOTTOM_KEY:
                 return notifySliderActionChange(2, (String) newValue);
             default:
                 break;
         }
 
-        String node = Constants.sBooleanNodePreferenceMap.get(key);
+        String node = SliderConstants.sBooleanNodePreferenceMap.get(key);
         if (!TextUtils.isEmpty(node) && FileUtils.fileWritable(node)) {
             Boolean value = (Boolean) newValue;
             FileUtils.writeValue(node, value ? "1" : "0");
             return true;
         }
-        node = Constants.sStringNodePreferenceMap.get(key);
+        node = SliderConstants.sStringNodePreferenceMap.get(key);
         if (!TextUtils.isEmpty(node) && FileUtils.fileWritable(node)) {
             FileUtils.writeValue(node, (String) newValue);
             return true;
@@ -502,10 +507,10 @@ public class DeviceExtras extends PreferenceFragment
     public void addPreferencesFromResource(int preferencesResId) {
         super.addPreferencesFromResource(preferencesResId);
         // Initialize node preferences
-        for (String pref : Constants.sBooleanNodePreferenceMap.keySet()) {
+        for (String pref : SliderConstants.sBooleanNodePreferenceMap.keySet()) {
             SwitchPreference b = (SwitchPreference) findPreference(pref);
             if (b == null) continue;
-            String node = Constants.sBooleanNodePreferenceMap.get(pref);
+            String node = SliderConstants.sBooleanNodePreferenceMap.get(pref);
             if (FileUtils.isFileReadable(node)) {
                 String curNodeValue = FileUtils.readOneLine(node);
                 b.setChecked(curNodeValue.equals("1"));
@@ -514,10 +519,10 @@ public class DeviceExtras extends PreferenceFragment
                 removePref(b);
             }
         }
-        for (String pref : Constants.sStringNodePreferenceMap.keySet()) {
+        for (String pref : SliderConstants.sStringNodePreferenceMap.keySet()) {
             ListPreference l = (ListPreference) findPreference(pref);
             if (l == null) continue;
-            String node = Constants.sStringNodePreferenceMap.get(pref);
+            String node = SliderConstants.sStringNodePreferenceMap.get(pref);
             if (FileUtils.isFileReadable(node)) {
                 l.setValue(FileUtils.readOneLine(node));
                 l.setOnPreferenceChangeListener(this);
@@ -540,27 +545,27 @@ public class DeviceExtras extends PreferenceFragment
 
     private boolean handleSliderUsageChange(String newValue) {
         switch (newValue) {
-            case Constants.NOTIF_SLIDER_FOR_NOTIFICATION:
+            case SliderConstants.NOTIF_SLIDER_FOR_NOTIFICATION:
                 return updateSliderActions(
                         R.array.notification_slider_mode_entries,
                         R.array.notification_slider_mode_entry_values);
-            case Constants.NOTIF_SLIDER_FOR_FLASHLIGHT:
+            case SliderConstants.NOTIF_SLIDER_FOR_FLASHLIGHT:
                 return updateSliderActions(
                         R.array.notification_slider_flashlight_entries,
                         R.array.notification_slider_flashlight_entry_values);
-            case Constants.NOTIF_SLIDER_FOR_BRIGHTNESS:
+            case SliderConstants.NOTIF_SLIDER_FOR_BRIGHTNESS:
                 return updateSliderActions(
                         R.array.notification_slider_brightness_entries,
                         R.array.notification_slider_brightness_entry_values);
-            case Constants.NOTIF_SLIDER_FOR_ROTATION:
+            case SliderConstants.NOTIF_SLIDER_FOR_ROTATION:
                 return updateSliderActions(
                         R.array.notification_slider_rotation_entries,
                         R.array.notification_slider_rotation_entry_values);
-            case Constants.NOTIF_SLIDER_FOR_RINGER:
+            case SliderConstants.NOTIF_SLIDER_FOR_RINGER:
                 return updateSliderActions(
                         R.array.notification_slider_ringer_entries,
                         R.array.notification_slider_ringer_entry_values);
-            case Constants.NOTIF_SLIDER_FOR_NOTIFICATION_RINGER:
+            case SliderConstants.NOTIF_SLIDER_FOR_NOTIFICATION_RINGER:
                 return updateSliderActions(
                         R.array.notification_ringer_slider_mode_entries,
                         R.array.notification_ringer_slider_mode_entry_values);
@@ -580,11 +585,11 @@ public class DeviceExtras extends PreferenceFragment
     private boolean updateSliderActions(int entriesResId, int entryValuesResId) {
         String[] entries = getResources().getStringArray(entriesResId);
         String[] entryValues = getResources().getStringArray(entryValuesResId);
-        return updateSliderPreference(Constants.NOTIF_SLIDER_ACTION_TOP_KEY,
+        return updateSliderPreference(SliderConstants.NOTIF_SLIDER_ACTION_TOP_KEY,
                 entries, entryValues) &&
-            updateSliderPreference(Constants.NOTIF_SLIDER_ACTION_MIDDLE_KEY,
+            updateSliderPreference(SliderConstants.NOTIF_SLIDER_ACTION_MIDDLE_KEY,
                     entries, entryValues) &&
-            updateSliderPreference(Constants.NOTIF_SLIDER_ACTION_BOTTOM_KEY,
+            updateSliderPreference(SliderConstants.NOTIF_SLIDER_ACTION_BOTTOM_KEY,
                     entries, entryValues);
     }
 
@@ -594,11 +599,11 @@ public class DeviceExtras extends PreferenceFragment
             return false;
         }
 
-        return updateSliderPreferenceValue(Constants.NOTIF_SLIDER_ACTION_TOP_KEY,
+        return updateSliderPreferenceValue(SliderConstants.NOTIF_SLIDER_ACTION_TOP_KEY,
                 defaults[0]) &&
-            updateSliderPreferenceValue(Constants.NOTIF_SLIDER_ACTION_MIDDLE_KEY,
+            updateSliderPreferenceValue(SliderConstants.NOTIF_SLIDER_ACTION_MIDDLE_KEY,
                     defaults[1]) &&
-            updateSliderPreferenceValue(Constants.NOTIF_SLIDER_ACTION_BOTTOM_KEY,
+            updateSliderPreferenceValue(SliderConstants.NOTIF_SLIDER_ACTION_BOTTOM_KEY,
                     defaults[2]);
     }
 
@@ -628,15 +633,15 @@ public class DeviceExtras extends PreferenceFragment
         ListPreference p;
 
         p = (ListPreference) findPreference(
-                Constants.NOTIF_SLIDER_ACTION_TOP_KEY);
+                SliderConstants.NOTIF_SLIDER_ACTION_TOP_KEY);
         actions[0] = Integer.parseInt(p.getValue());
 
         p = (ListPreference) findPreference(
-                Constants.NOTIF_SLIDER_ACTION_MIDDLE_KEY);
+                SliderConstants.NOTIF_SLIDER_ACTION_MIDDLE_KEY);
         actions[1] = Integer.parseInt(p.getValue());
 
         p = (ListPreference) findPreference(
-                Constants.NOTIF_SLIDER_ACTION_BOTTOM_KEY);
+                SliderConstants.NOTIF_SLIDER_ACTION_BOTTOM_KEY);
         actions[2] = Integer.parseInt(p.getValue());
 
         return actions;
@@ -650,7 +655,7 @@ public class DeviceExtras extends PreferenceFragment
 
     private boolean notifySliderActionChange(int index, String value) {
         ListPreference p = (ListPreference) findPreference(
-                Constants.NOTIF_SLIDER_USAGE_KEY);
+                SliderConstants.NOTIF_SLIDER_USAGE_KEY);
         int usage = Integer.parseInt(p.getValue());
 
         int[] actions = getCurrentSliderActions();
@@ -662,9 +667,9 @@ public class DeviceExtras extends PreferenceFragment
 
     public static void sendUpdateBroadcast(Context context,
             int usage, int[] actions) {
-        Intent intent = new Intent(Constants.ACTION_UPDATE_SLIDER_SETTINGS);
-        intent.putExtra(Constants.EXTRA_SLIDER_USAGE, usage);
-        intent.putExtra(Constants.EXTRA_SLIDER_ACTIONS, actions);
+        Intent intent = new Intent(SliderConstants.ACTION_UPDATE_SLIDER_SETTINGS);
+        intent.putExtra(SliderConstants.EXTRA_SLIDER_USAGE, usage);
+        intent.putExtra(SliderConstants.EXTRA_SLIDER_ACTIONS, actions);
         intent.setFlags(Intent.FLAG_RECEIVER_REGISTERED_ONLY);
         context.sendBroadcastAsUser(intent, UserHandle.CURRENT);
         Log.d(TAG, "update slider usage " + usage + " with actions: " +
@@ -676,7 +681,7 @@ public class DeviceExtras extends PreferenceFragment
         SharedPreferences prefs = context.getSharedPreferences(
                 context.getPackageName() + "_preferences", Context.MODE_PRIVATE);
 
-        String usage = prefs.getString(Constants.NOTIF_SLIDER_USAGE_KEY,
+        String usage = prefs.getString(SliderConstants.NOTIF_SLIDER_USAGE_KEY,
                 res.getString(R.string.config_defaultNotificationSliderUsage));
 
         int defaultsResId = getDefaultResIdForUsage(usage);
@@ -690,19 +695,19 @@ public class DeviceExtras extends PreferenceFragment
         }
 
         String actionTop = prefs.getString(
-                Constants.NOTIF_SLIDER_ACTION_TOP_KEY, defaults[0]);
+                SliderConstants.NOTIF_SLIDER_ACTION_TOP_KEY, defaults[0]);
 
         String actionMiddle = prefs.getString(
-                Constants.NOTIF_SLIDER_ACTION_MIDDLE_KEY, defaults[1]);
+                SliderConstants.NOTIF_SLIDER_ACTION_MIDDLE_KEY, defaults[1]);
 
         String actionBottom = prefs.getString(
-                Constants.NOTIF_SLIDER_ACTION_BOTTOM_KEY, defaults[2]);
+                SliderConstants.NOTIF_SLIDER_ACTION_BOTTOM_KEY, defaults[2]);
 
         prefs.edit()
-            .putString(Constants.NOTIF_SLIDER_USAGE_KEY, usage)
-            .putString(Constants.NOTIF_SLIDER_ACTION_TOP_KEY, actionTop)
-            .putString(Constants.NOTIF_SLIDER_ACTION_MIDDLE_KEY, actionMiddle)
-            .putString(Constants.NOTIF_SLIDER_ACTION_BOTTOM_KEY, actionBottom)
+            .putString(SliderConstants.NOTIF_SLIDER_USAGE_KEY, usage)
+            .putString(SliderConstants.NOTIF_SLIDER_ACTION_TOP_KEY, actionTop)
+            .putString(SliderConstants.NOTIF_SLIDER_ACTION_MIDDLE_KEY, actionMiddle)
+            .putString(SliderConstants.NOTIF_SLIDER_ACTION_BOTTOM_KEY, actionBottom)
             .commit();
 
         sendUpdateBroadcast(context, Integer.parseInt(usage), new int[] {
@@ -714,17 +719,17 @@ public class DeviceExtras extends PreferenceFragment
 
     private static int getDefaultResIdForUsage(String usage) {
         switch (usage) {
-            case Constants.NOTIF_SLIDER_FOR_NOTIFICATION:
+            case SliderConstants.NOTIF_SLIDER_FOR_NOTIFICATION:
                 return R.array.config_defaultSliderActionsForNotification;
-            case Constants.NOTIF_SLIDER_FOR_FLASHLIGHT:
+            case SliderConstants.NOTIF_SLIDER_FOR_FLASHLIGHT:
                 return R.array.config_defaultSliderActionsForFlashlight;
-            case Constants.NOTIF_SLIDER_FOR_BRIGHTNESS:
+            case SliderConstants.NOTIF_SLIDER_FOR_BRIGHTNESS:
                 return R.array.config_defaultSliderActionsForBrightness;
-            case Constants.NOTIF_SLIDER_FOR_ROTATION:
+            case SliderConstants.NOTIF_SLIDER_FOR_ROTATION:
                 return R.array.config_defaultSliderActionsForRotation;
-            case Constants.NOTIF_SLIDER_FOR_RINGER:
+            case SliderConstants.NOTIF_SLIDER_FOR_RINGER:
                 return R.array.config_defaultSliderActionsForRinger;
-            case Constants.NOTIF_SLIDER_FOR_NOTIFICATION_RINGER:
+            case SliderConstants.NOTIF_SLIDER_FOR_NOTIFICATION_RINGER:
                 return R.array.config_defaultSliderActionsForNotificationRinger;
             default:
                 return 0;

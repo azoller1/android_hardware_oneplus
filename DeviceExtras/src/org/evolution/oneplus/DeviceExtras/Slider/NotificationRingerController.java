@@ -23,9 +23,6 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 
-import org.evolution.oneplus.DeviceExtras.Constants;
-import org.evolution.oneplus.DeviceExtras.SliderControllerBase;
-
 public final class NotificationRingerController extends SliderControllerBase {
 
     public static final int ID = 6;
@@ -67,7 +64,7 @@ public final class NotificationRingerController extends SliderControllerBase {
                         mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_VIBRATE);
                     }
                 }, CHANGE_DELAY);
-                return Constants.MODE_VIBRATE;
+                return SliderConstants.MODE_VIBRATE;
             case RINGER_SILENT:
                 mRingMode = RINGER_SILENT;
                 mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_OFF, null, TAG);
@@ -78,7 +75,7 @@ public final class NotificationRingerController extends SliderControllerBase {
                         mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_SILENT);
                     }
                 }, CHANGE_DELAY);
-                return Constants.MODE_SILENT;
+                return SliderConstants.MODE_SILENT;
             case NOTIFICATION_TOTAL_SILENCE:
                 mZenMode = NOTIFICATION_TOTAL_SILENCE;
                 mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_SILENT);
@@ -89,7 +86,7 @@ public final class NotificationRingerController extends SliderControllerBase {
                         mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_NO_INTERRUPTIONS, null, TAG);
                     }
                 }, CHANGE_DELAY);
-                return Constants.MODE_TOTAL_SILENCE;
+                return SliderConstants.MODE_TOTAL_SILENCE;
             case NOTIFICATION_PRIORITY_ONLY:
                 mZenMode = NOTIFICATION_PRIORITY_ONLY;
                 mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
@@ -100,7 +97,7 @@ public final class NotificationRingerController extends SliderControllerBase {
                         mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_IMPORTANT_INTERRUPTIONS, null, TAG);
                     }
                 }, CHANGE_DELAY);
-                return Constants.MODE_PRIORITY_ONLY;
+                return SliderConstants.MODE_PRIORITY_ONLY;
             case NOTIFICATION_ALL:
                 mRingMode = NOTIFICATION_ALL;
                 mNotificationManager.setZenMode(Settings.Global.ZEN_MODE_OFF, null, TAG);
@@ -111,7 +108,7 @@ public final class NotificationRingerController extends SliderControllerBase {
                         mAudioManager.setRingerModeInternal(AudioManager.RINGER_MODE_NORMAL);
                     }
                 }, CHANGE_DELAY);
-                return Constants.MODE_NONE;
+                return SliderConstants.MODE_NONE;
         }
         return 0;
     }

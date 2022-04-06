@@ -24,9 +24,6 @@ import android.os.Handler;
 import android.os.PowerManager;
 import android.util.Log;
 
-import org.evolution.oneplus.DeviceExtras.Constants;
-import org.evolution.oneplus.DeviceExtras.SliderControllerBase;
-
 public final class FlashlightController extends SliderControllerBase {
 
     public static final int ID = 2;
@@ -76,7 +73,7 @@ public final class FlashlightController extends SliderControllerBase {
                 if (mWakeLock.isHeld()) {
                     mWakeLock.release();
                 }
-                return succeed ? Constants.MODE_FLASHLIGHT_OFF : 0;
+                return succeed ? SliderConstants.MODE_FLASHLIGHT_OFF : 0;
             case FLASHLIGHT_ON:
                 mCameraId = getCameraId();
                 succeed = setTorchMode(true);
@@ -84,14 +81,14 @@ public final class FlashlightController extends SliderControllerBase {
                 if (mWakeLock.isHeld()) {
                     mWakeLock.release();
                 }
-                return succeed ? Constants.MODE_FLASHLIGHT_ON : 0;
+                return succeed ? SliderConstants.MODE_FLASHLIGHT_ON : 0;
             case FLASHLIGHT_BLINK:
                 mBlinkHandler.removeCallbacksAndMessages(null);
                 mCameraId = getCameraId();
                 if (setTorchMode(true)) {
                     mWakeLock.acquire();
                     mBlinkHandler.postDelayed(mBlinkRunnble, BLINK_INTERVAL);
-                    return Constants.MODE_FLASHLIGHT_BLINK;
+                    return SliderConstants.MODE_FLASHLIGHT_BLINK;
                 } else {
                     return 0;
                 }

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.services;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;
@@ -46,6 +46,9 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.lang.StringBuffer;
 import java.lang.Math;
+
+import org.evolution.oneplus.DeviceExtras.FileUtils;
+import org.evolution.oneplus.DeviceExtras.R;
 
 public class FPSInfoService extends Service {
     private View mView;

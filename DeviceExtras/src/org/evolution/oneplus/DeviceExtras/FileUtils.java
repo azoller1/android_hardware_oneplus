@@ -36,6 +36,9 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 
+import org.evolution.oneplus.DeviceExtras.DeviceExtras;
+import org.evolution.oneplus.DeviceExtras.services.AutoHBMService;
+
 public class FileUtils {
 
     private static boolean mServiceEnabled = false;

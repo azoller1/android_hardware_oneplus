@@ -1,4 +1,4 @@
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.services;
 
 import android.app.KeyguardManager;
 import android.app.Service;
@@ -14,6 +14,10 @@ import android.hardware.SensorManager;
 import android.os.IBinder;
 import android.os.PowerManager;
 import androidx.preference.PreferenceManager;
+
+import org.evolution.oneplus.DeviceExtras.DeviceExtras;
+import org.evolution.oneplus.DeviceExtras.FileUtils;
+import org.evolution.oneplus.DeviceExtras.R;
 
 public class AutoHBMService extends Service {
     private static final int HBM_NODE = R.string.node_auto_hbm_service;

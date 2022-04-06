@@ -16,7 +16,7 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 *
 */
-package org.evolution.oneplus.DeviceExtras;
+package org.evolution.oneplus.DeviceExtras.panelsettings;
 
 import android.content.Context;
 import androidx.viewpager.widget.PagerAdapter;
@@ -25,6 +25,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import org.evolution.oneplus.DeviceExtras.R;
 
 public class ViewPagerAdapter extends PagerAdapter {
 
